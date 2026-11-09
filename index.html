@@ -38,27 +38,17 @@
     overflow: hidden;
     min-height: 100vh;
     min-height: 100svh;
-    padding: 40px 16px 0;
+    /* Room under the buttons for the phone, which is pinned to the
+       bottom-right corner (the image is cropped on those two sides). */
+    padding: 40px 16px clamp(270px, 74vw, 470px);
     text-align: center;
-    background: linear-gradient(170deg, #9A1A40 0%, var(--maroon) 38%, var(--maroon-deep) 100%);
+    /* AI-made backdrop (brand-source/download-bg*.png): flat maroon with
+       concentric arcs bottom-left; the colour fills around it. */
+    background: #8B1739 url(bg.webp) left bottom / cover no-repeat;
   }
-  /* The concentric arcs behind the phone, lighter maroon. */
-  .hero::before, .hero::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    left: -30%;
-    pointer-events: none;
+  @media (min-aspect-ratio: 1/1) {
+    .hero { background-image: url(bg-wide.webp); background-color: #8B0E34; }
   }
-  .hero::before {
-    width: 120%; aspect-ratio: 1; bottom: -62%;
-    background: radial-gradient(circle, rgba(255,255,255,.10) 0 52%, rgba(255,255,255,.06) 52% 70%, transparent 70%);
-  }
-  .hero::after {
-    width: 70%; aspect-ratio: 1; bottom: -30%; left: -12%;
-    background: rgba(255,255,255,.07);
-  }
-
   .hero-in { position: relative; max-width: 760px; margin: 0 auto; }
   .brand {
     display: inline-flex; align-items: center; gap: 12px;
@@ -130,54 +120,14 @@
   .cta i svg { width: 24px; height: 24px; }
 
   /* ---------- the phone ---------- */
-  .phone-wrap {
-    position: relative; z-index: 1;
-    height: clamp(330px, 62vw, 470px);
-    margin-top: 16px;
-  }
+  /* AI-made mockup (brand-source/download-phone.png, 500 px) showing the
+     app's icon on a home screen. */
   .phone {
-    position: absolute;
-    inset-inline-start: 22%;
-    top: 30px;
-    width: clamp(330px, 88vw, 560px);
-    aspect-ratio: 0.5;
-    border-radius: 64px;
-    background: #0B0B0C;
-    border: 10px solid #2B2B2E;
-    box-shadow:
-      0 0 0 2px #8E8E93,
-      inset 0 0 0 2px #1A1A1C,
-      -30px 40px 70px rgba(0,0,0,.45);
-    transform: rotate(-14deg);
-    transform-origin: top right;
+    position: absolute; right: 0; bottom: 0;
+    width: clamp(290px, 80vw, 500px); height: auto;
+    pointer-events: none;
+    filter: drop-shadow(-18px 24px 30px rgba(40, 0, 12, .35));
   }
-  .phone .cam {
-    position: absolute; top: 22px; left: 50%;
-    width: 30px; height: 30px; margin-left: -15px;
-    border-radius: 50%; background: #1C1C1F;
-    box-shadow: inset 0 0 0 6px #111, inset 0 0 0 9px #26262a;
-  }
-  .phone .time {
-    position: absolute; top: 34px; inset-inline-end: 52px;
-    direction: ltr;
-    font: 600 clamp(22px, 5vw, 30px)/1 -apple-system, "SF Pro Display", Cairo, sans-serif;
-    color: #fff;
-  }
-  .apps {
-    position: absolute; top: 110px; inset-inline: 40px;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 22px;
-  }
-  .app { text-align: center; color: #fff; font-size: clamp(12px, 3vw, 17px); font-weight: 600; }
-  .app .ic {
-    display: block; width: 100%; aspect-ratio: 1; border-radius: 24%;
-    margin-bottom: 8px;
-  }
-  .app .ours { background: var(--beige) url(icon.png) center/cover; box-shadow: 0 0 0 2px var(--gold); }
-  .app .cam-ic { background: linear-gradient(#D9D9DE, #A8A8AF); display: grid; place-items: center; }
-  .app .cam-ic svg { width: 55%; height: 55%; }
-  .app .notes-ic { background: linear-gradient(#FFE27A, #F7C93B); }
-  .app .wa-ic { background: linear-gradient(#5BE584, #22B75A); display: grid; place-items: center; }
-  .app .wa-ic svg { width: 58%; height: 58%; }
 
   /* ---------- how to install ---------- */
   .help {
@@ -194,7 +144,7 @@
 
   @media (prefers-reduced-motion: no-preference) {
     .phone { animation: rise .9s cubic-bezier(.2,.7,.2,1) both .15s; }
-    @keyframes rise { from { transform: translateY(60px) rotate(-14deg); opacity: 0; } }
+    @keyframes rise { from { transform: translate(40px, 60px); opacity: 0; } }
   }
 </style>
 </head>
@@ -227,19 +177,8 @@
     <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg></i>
   </a>
 
-  <div class="phone-wrap" aria-hidden="true">
-    <div class="phone">
-      <span class="cam"></span>
-      <span class="time">9:41</span>
-      <div class="apps">
-        <div class="app"><span class="ic ours"></span>القطرية</div>
-        <div class="app"><span class="ic cam-ic"><svg viewBox="0 0 24 24" fill="#2B2B2E"><path d="M9 4.5 7.6 6.5H4.5A2 2 0 0 0 2.5 8.5v9a2 2 0 0 0 2 2h15a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-3.1L15 4.5H9zm3 4a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5zm0 2a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5z"/></svg></span>الكاميرا</div>
-        <div class="app"><span class="ic wa-ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.5A9.5 9.5 0 0 0 3.8 16.8L2.5 21.5l4.8-1.26A9.5 9.5 0 1 0 12 2.5zm5.3 13.4c-.22.63-1.3 1.2-1.8 1.25-.47.06-1.06.08-1.7-.11-.4-.13-.9-.29-1.55-.57-2.73-1.18-4.5-3.92-4.64-4.1-.13-.18-1.1-1.47-1.1-2.8 0-1.34.7-2 .95-2.27.25-.27.55-.34.73-.34h.52c.17 0 .4-.06.62.47.23.55.78 1.9.85 2.03.07.14.11.3.02.48-.09.18-.13.29-.27.45-.13.16-.28.35-.4.47-.13.13-.27.28-.12.55.16.27.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.17 1.34.27.13.42.11.58-.07.16-.18.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.52.31.07.12.07.66-.15 1.3z"/></svg></span>واتساب</div>
-        <div class="app"><span class="ic notes-ic"></span>ملاحظات</div>
-      </div>
-    </div>
-  </div>
 </div>
+  <img class="phone" src="phone.webp" width="500" height="500" alt="" fetchpriority="high">
 </section>
 
 <section class="help">
