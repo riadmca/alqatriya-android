@@ -2,95 +2,265 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>تطبيق القطرية للعبايات</title>
-<meta name="description" content="حمّلي تطبيق القطرية للعبايات لأندرويد: عبايات قطرية أنيقة، توصيل إلى 58 ولاية والدفع عند الاستلام.">
-<meta property="og:title" content="تطبيق القطرية للعبايات">
+<meta name="description" content="تطبيق القطرية للعبايات متوفر الآن: عبايات قطرية أنيقة، توصيل إلى 58 ولاية والدفع عند الاستلام.">
+<meta name="theme-color" content="#7A1131">
+<meta property="og:title" content="تطبيق القطرية للعبايات متوفر الآن">
 <meta property="og:description" content="عبايات قطرية أنيقة — توصيل إلى 58 ولاية والدفع عند الاستلام.">
-<meta property="og:image" content="icon.png">
+<meta property="og:image" content="https://riadmca.github.io/alqatriya-android/icon.png">
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --beige: #F3EADB;
-    --card: #FDFAF4;
     --maroon: #8A1538;
-    --maroon-deep: #6E0F2B;
+    --maroon-deep: #5E0C24;
+    --maroon-night: #3A0716;
+    --cream: #FDFAF4;
+    --beige: #F3EADB;
     --gold: #D4AF37;
+    --gold-light: #F3E3A8;
     --ink: #0C0B0A;
-    --muted: #5C5148;
   }
   * { box-sizing: border-box; }
+  html, body { margin: 0; }
   body {
-    margin: 0;
     background: var(--beige);
-    color: var(--ink);
+    color: var(--cream);
     font-family: Cairo, system-ui, sans-serif;
-    line-height: 1.7;
   }
-  main { max-width: 520px; margin: 0 auto; padding: 32px 16px 48px; text-align: center; }
-  .icon {
-    width: 132px; height: 132px; border-radius: 30px;
-    border: 2px solid var(--gold);
-    box-shadow: 0 10px 30px rgba(110, 15, 43, .18);
+
+  /* ---------- the poster ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 40px 16px 0;
+    text-align: center;
+    background: linear-gradient(170deg, #9A1A40 0%, var(--maroon) 38%, var(--maroon-deep) 100%);
   }
-  h1 { font-size: 28px; font-weight: 800; color: var(--maroon); margin: 18px 0 4px; }
-  .tag { color: var(--muted); margin: 0 0 26px; }
-  .download {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: linear-gradient(180deg, var(--maroon), var(--maroon-deep));
-    color: var(--card); text-decoration: none;
-    font-size: 19px; font-weight: 800;
-    padding: 15px 34px; border-radius: 999px;
+  /* The concentric arcs behind the phone, lighter maroon. */
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: -30%;
+    pointer-events: none;
+  }
+  .hero::before {
+    width: 120%; aspect-ratio: 1; bottom: -62%;
+    background: radial-gradient(circle, rgba(255,255,255,.10) 0 52%, rgba(255,255,255,.06) 52% 70%, transparent 70%);
+  }
+  .hero::after {
+    width: 70%; aspect-ratio: 1; bottom: -30%; left: -12%;
+    background: rgba(255,255,255,.07);
+  }
+
+  .hero-in { position: relative; max-width: 760px; margin: 0 auto; }
+  .brand {
+    display: inline-flex; align-items: center; gap: 12px;
+    text-decoration: none; color: var(--cream);
+    position: relative; z-index: 1;
+  }
+  .brand img {
+    width: 52px; height: 52px; border-radius: 14px;
     border: 1.5px solid var(--gold);
-    box-shadow: 0 8px 22px rgba(110, 15, 43, .3);
   }
-  .download:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
-  .meta { font-size: 13px; color: var(--muted); margin-top: 10px; }
-  .card {
-    background: var(--card); border: 1px solid rgba(212, 175, 55, .55);
-    border-radius: 18px; padding: 18px 20px; margin-top: 30px; text-align: start;
+  .brand span { font-family: "Reem Kufi", Cairo, sans-serif; font-size: 28px; font-weight: 700; }
+
+  h1 {
+    position: relative; z-index: 1;
+    font-size: clamp(40px, 11vw, 68px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 44px 0 14px;
+    letter-spacing: -.5px;
   }
-  .card h2 { font-size: 18px; color: var(--maroon); margin: 0 0 8px; }
-  ol, ul { margin: 0; padding-inline-start: 22px; }
-  li { margin: 4px 0; }
-  .site { display: inline-block; margin-top: 26px; color: var(--maroon); font-weight: 600; }
+  .lead {
+    position: relative; z-index: 1;
+    max-width: 470px; margin: 0 auto;
+    font-size: 17px; line-height: 1.75;
+    color: #F6E9EC;
+  }
+
+  /* ---------- the two buttons ---------- */
+  .stores {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+    margin: 28px 0 0;
+  }
+  .store {
+    display: inline-flex; align-items: center; gap: 10px;
+    min-width: 172px; padding: 10px 22px;
+    border: 1.5px solid rgba(253,250,244,.85);
+    border-radius: 999px;
+    color: var(--cream); text-decoration: none;
+    transition: background .2s;
+  }
+  .store:hover { background: rgba(253,250,244,.10); }
+  .store:focus-visible, .cta:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .store svg { width: 26px; height: 26px; flex: none; }
+  .store small { display: block; font-size: 11.5px; line-height: 1.3; opacity: .9; }
+  .store b { display: block; font-size: 18px; line-height: 1.25; font-weight: 700; }
+  .store .ltr { direction: ltr; unicode-bidi: isolate; }
+
+  /* ---------- the call to action ---------- */
+  .cta {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-top: 22px;
+    padding: 6px 22px 6px 6px;
+    border-radius: 999px;
+    background: rgba(253,250,244,.20);
+    border: 1px solid rgba(253,250,244,.28);
+    color: var(--cream); text-decoration: none;
+    font-size: 18px; font-weight: 700;
+    backdrop-filter: blur(4px);
+  }
+  .cta i {
+    order: 2;
+    display: grid; place-items: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gold-light);
+    color: var(--maroon-deep);
+  }
+  .cta i svg { width: 24px; height: 24px; }
+
+  /* ---------- the phone ---------- */
+  .phone-wrap {
+    position: relative; z-index: 1;
+    height: clamp(330px, 62vw, 470px);
+    margin-top: 16px;
+  }
+  .phone {
+    position: absolute;
+    inset-inline-start: 22%;
+    top: 30px;
+    width: clamp(330px, 88vw, 560px);
+    aspect-ratio: 0.5;
+    border-radius: 64px;
+    background: #0B0B0C;
+    border: 10px solid #2B2B2E;
+    box-shadow:
+      0 0 0 2px #8E8E93,
+      inset 0 0 0 2px #1A1A1C,
+      -30px 40px 70px rgba(0,0,0,.45);
+    transform: rotate(-14deg);
+    transform-origin: top right;
+  }
+  .phone .cam {
+    position: absolute; top: 22px; left: 50%;
+    width: 30px; height: 30px; margin-left: -15px;
+    border-radius: 50%; background: #1C1C1F;
+    box-shadow: inset 0 0 0 6px #111, inset 0 0 0 9px #26262a;
+  }
+  .phone .time {
+    position: absolute; top: 34px; inset-inline-end: 52px;
+    direction: ltr;
+    font: 600 clamp(22px, 5vw, 30px)/1 -apple-system, "SF Pro Display", Cairo, sans-serif;
+    color: #fff;
+  }
+  .apps {
+    position: absolute; top: 110px; inset-inline: 40px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 22px;
+  }
+  .app { text-align: center; color: #fff; font-size: clamp(12px, 3vw, 17px); font-weight: 600; }
+  .app .ic {
+    display: block; width: 100%; aspect-ratio: 1; border-radius: 24%;
+    margin-bottom: 8px;
+  }
+  .app .ours { background: var(--beige) url(icon.png) center/cover; box-shadow: 0 0 0 2px var(--gold); }
+  .app .cam-ic { background: linear-gradient(#D9D9DE, #A8A8AF); display: grid; place-items: center; }
+  .app .cam-ic svg { width: 55%; height: 55%; }
+  .app .notes-ic { background: linear-gradient(#FFE27A, #F7C93B); }
+  .app .wa-ic { background: linear-gradient(#5BE584, #22B75A); display: grid; place-items: center; }
+  .app .wa-ic svg { width: 58%; height: 58%; }
+
+  /* ---------- how to install ---------- */
+  .help {
+    background: var(--beige); color: var(--ink);
+    padding: 34px 16px 44px;
+  }
+  .help-in { max-width: 560px; margin: 0 auto; }
+  .help h2 { color: var(--maroon); font-size: 22px; margin: 0 0 6px; }
+  .help h3 { color: var(--maroon); font-size: 17px; margin: 22px 0 6px; }
+  .help ol { margin: 0; padding-inline-start: 22px; line-height: 1.8; }
+  .help a { color: var(--maroon); font-weight: 700; }
+  .help .ltr { direction: ltr; unicode-bidi: isolate; }
+  footer { text-align: center; font-size: 13px; color: #5C5148; margin-top: 28px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .phone { animation: rise .9s cubic-bezier(.2,.7,.2,1) both .15s; }
+    @keyframes rise { from { transform: translateY(60px) rotate(-14deg); opacity: 0; } }
+  }
 </style>
 </head>
 <body>
-<main>
-  <img class="icon" src="icon.png" width="132" height="132" alt="أيقونة القطرية للعبايات">
-  <h1>القطرية للعبايات</h1>
-  <p class="tag">عبايات قطرية أنيقة · توصيل إلى 58 ولاية · الدفع عند الاستلام</p>
 
-  <a class="download" href="https://github.com/riadmca/alqatriya-android/releases/latest/download/ElQatariya-Boutique.apk">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-    حمّلي التطبيق
+<section class="hero">
+<div class="hero-in">
+  <a class="brand" href="https://alqatriya.com" aria-label="القطرية للعبايات — الموقع">
+    <img src="icon.png" width="52" height="52" alt="">
+    <span>القطرية للعبايات</span>
   </a>
-  <p class="meta">أندرويد 7 فما فوق · 4 ميغابايت · مجاني</p>
 
-  <section class="card">
+  <h1>التطبيق متوفر الآن</h1>
+  <p class="lead">تعرّفي على تطبيق القطرية للعبايات: أحدث العبايات القطرية، طلب سريع في دقيقة، توصيل إلى 58 ولاية والدفع عند الاستلام — كل ذلك من تطبيق واحد.</p>
+
+  <div class="stores">
+
+    <a class="store" href="https://github.com/riadmca/alqatriya-android/releases/latest/download/ElQatariya-Boutique.apk" aria-label="حمّلي تطبيق أندرويد">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22A11.4 11.4 0 0 0 12 8.15c-1.77 0-3.43.38-4.92 1L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48C3.3 11.16 1.2 14.3 1 18h22c-.2-3.7-2.3-6.84-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>
+      <span><small>حمّليه الآن لـ</small><b>أندرويد</b></span>
+    </a>
+    <a class="store" href="https://alqatriya.com" aria-label="آيفون: تسوّقي من الموقع alqatriya.com">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.1 1.72-3.12 1.8-3.17-.98-1.43-2.5-1.63-3.05-1.65-1.3-.13-2.53.76-3.19.76-.66 0-1.67-.74-2.75-.72-1.41.02-2.72.82-3.45 2.09-1.47 2.55-.38 6.33 1.06 8.4.7 1.01 1.53 2.15 2.62 2.11 1.05-.04 1.45-.68 2.72-.68 1.27 0 1.63.68 2.74.66 1.13-.02 1.85-1.03 2.54-2.05.8-1.17 1.13-2.3 1.15-2.36-.03-.01-2.2-.85-2.22-3.36zM14.3 6.43c.58-.7.97-1.68.86-2.65-.83.03-1.84.55-2.44 1.25-.54.62-1.01 1.61-.88 2.56.93.07 1.88-.47 2.46-1.16z"/></svg>
+      <span><small>لآيفون، تسوّقي من</small><b class="ltr">alqatriya.com</b></span>
+    </a>
+  </div>
+
+  <a class="cta" href="https://github.com/riadmca/alqatriya-android/releases/latest/download/ElQatariya-Boutique.apk">
+    <span>حمّلي التطبيق اليوم!</span>
+    <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg></i>
+  </a>
+
+  <div class="phone-wrap" aria-hidden="true">
+    <div class="phone">
+      <span class="cam"></span>
+      <span class="time">9:41</span>
+      <div class="apps">
+        <div class="app"><span class="ic ours"></span>القطرية</div>
+        <div class="app"><span class="ic cam-ic"><svg viewBox="0 0 24 24" fill="#2B2B2E"><path d="M9 4.5 7.6 6.5H4.5A2 2 0 0 0 2.5 8.5v9a2 2 0 0 0 2 2h15a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-3.1L15 4.5H9zm3 4a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5zm0 2a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5z"/></svg></span>الكاميرا</div>
+        <div class="app"><span class="ic wa-ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2.5A9.5 9.5 0 0 0 3.8 16.8L2.5 21.5l4.8-1.26A9.5 9.5 0 1 0 12 2.5zm5.3 13.4c-.22.63-1.3 1.2-1.8 1.25-.47.06-1.06.08-1.7-.11-.4-.13-.9-.29-1.55-.57-2.73-1.18-4.5-3.92-4.64-4.1-.13-.18-1.1-1.47-1.1-2.8 0-1.34.7-2 .95-2.27.25-.27.55-.34.73-.34h.52c.17 0 .4-.06.62.47.23.55.78 1.9.85 2.03.07.14.11.3.02.48-.09.18-.13.29-.27.45-.13.16-.28.35-.4.47-.13.13-.27.28-.12.55.16.27.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.17 1.34.27.13.42.11.58-.07.16-.18.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.52.31.07.12.07.66-.15 1.3z"/></svg></span>واتساب</div>
+        <div class="app"><span class="ic notes-ic"></span>ملاحظات</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="help">
+  <div class="help-in">
     <h2>طريقة التثبيت</h2>
+    <h3>على أندرويد</h3>
     <ol>
-      <li>اضغطي «حمّلي التطبيق» وانتظري انتهاء التحميل.</li>
-      <li>افتحي الملف <b dir="ltr">ElQatariya-Boutique.apk</b> من الإشعارات أو من «التنزيلات».</li>
+      <li>اضغطي «أندرويد» أو «حمّلي التطبيق اليوم!» وانتظري انتهاء التحميل.</li>
+      <li>افتحي الملف <b class="ltr">ElQatariya-Boutique.apk</b> من الإشعارات أو من «التنزيلات».</li>
       <li>إن ظهرت رسالة «مصدر غير معروف»: اضغطي «الإعدادات» ثم فعّلي «السماح من هذا المصدر» وارجعي.</li>
-      <li>اضغطي «تثبيت»، ثم «فتح».</li>
+      <li>اضغطي «تثبيت» ثم «فتح». (أندرويد 7 فما فوق · 4 ميغابايت · مجاني)</li>
     </ol>
-  </section>
+    <h3>على آيفون</h3>
+    <ol>
+      <li>افتحي <a class="ltr" href="https://alqatriya.com">alqatriya.com</a> في Safari.</li>
+      <li>اضغطي زر المشاركة <span aria-hidden="true">⬆︎</span> ثم «إضافة إلى الشاشة الرئيسية».</li>
+      <li>تظهر أيقونة القطرية على شاشتك وتفتح المتجر مباشرة.</li>
+    </ol>
+    <footer>© القطرية للعبايات · <a href="https://alqatriya.com" class="ltr">alqatriya.com</a></footer>
+  </div>
+</section>
 
-  <section class="card">
-    <h2>في التطبيق</h2>
-    <ul>
-      <li>كل العبايات والأقسام، بالعربية والفرنسية.</li>
-      <li>السلة والمفضلة والطلب السريع، والدفع عند الاستلام.</li>
-      <li>الجديد يظهر فورًا، بدون تحديث التطبيق.</li>
-    </ul>
-  </section>
-
-  <a class="site" href="https://alqatriya.com">أو تسوّقي من الموقع: alqatriya.com</a>
-</main>
 </body>
 </html>
